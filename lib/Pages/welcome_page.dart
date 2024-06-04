@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_ebook/Components/primary_button.dart';
 import 'package:project_ebook/Config/colors.dart';
+import 'package:project_ebook/Pages/HomePage/home_page.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -96,7 +98,9 @@ class WelcomePage extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             child: PrimaryButton(
               btnName: 'Continue',
-              ontap: () {},
+              ontap: () {
+                Get.offAll(const HomePage());
+              },
             ),
           )
         ],

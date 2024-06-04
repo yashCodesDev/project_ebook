@@ -13,7 +13,7 @@ class PrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: ontap,
       child: Container(
         height: 55,
         padding: const EdgeInsets.all(10),
