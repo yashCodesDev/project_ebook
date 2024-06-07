@@ -45,7 +45,7 @@ class BookTile extends StatelessWidget {
                           .withOpacity(0.2),
                       spreadRadius: 2,
                       blurRadius: 8,
-                      offset: Offset(2, 2),
+                      offset: const Offset(2, 2),
                     )
                   ],
                 ),
