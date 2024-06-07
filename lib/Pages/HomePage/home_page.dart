@@ -142,6 +142,7 @@ import 'package:project_ebook/Components/book_card.dart';
 import 'package:project_ebook/Components/book_tile.dart';
 import 'package:project_ebook/Controller/book_controller.dart';
 import 'package:project_ebook/Models/Data.dart';
+import 'package:project_ebook/Pages/BookDetails/Bookdetails.dart';
 import 'package:project_ebook/Pages/HomePage/Widgets/app_bar.dart';
 import 'package:project_ebook/Pages/HomePage/Widgets/category_widget.dart';
 import 'package:project_ebook/Pages/HomePage/Widgets/my_input_textfield.dart';
@@ -246,8 +247,15 @@ class HomePage extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: bookData
-                    .map((e) => BookCard(
-                        coverUrl: e.coverUrl!, title: e.title!, ontap: () {}))
+                    .map(
+                      (e) => BookCard(
+                        coverUrl: e.coverUrl!,
+                        title: e.title!,
+                        ontap: () {
+                          Get.to(BookDetails());
+                        },
+                      ),
+                    )
                     .toList(),
               ),
             ),
