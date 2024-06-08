@@ -35,6 +35,8 @@ var bookData = [
     price: 100,
     pages: 234,
     language: "ENG",
+    bookurl:
+        'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
   ),
   BookModel(
     id: "2",
@@ -51,6 +53,8 @@ var bookData = [
     numberofRating: "10,",
     language: "ENG",
     pages: 234,
+    bookurl:
+        'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
   ),
   BookModel(
     id: "3",
@@ -67,6 +71,8 @@ var bookData = [
     price: 100,
     language: "ENG",
     pages: 234,
+    bookurl:
+        'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
   ),
   BookModel(
     id: "4",
@@ -82,6 +88,8 @@ var bookData = [
     price: 100,
     pages: 234,
     language: "ENG",
-    numberofRating: "10,",
+    numberofRating: "10",
+    bookurl:
+        'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
   )
 ];
