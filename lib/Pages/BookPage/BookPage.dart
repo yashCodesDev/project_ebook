@@ -3,14 +3,10 @@ import 'package:get/get.dart';
 import 'package:project_ebook/Controller/Pdf_controller.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
-class BookPage extends StatefulWidget {
-  const BookPage({super.key});
+class BookPage extends StatelessWidget {
+  final String bookUrl;
+  const BookPage({super.key, required this.bookUrl});
 
-  @override
-  State<BookPage> createState() => _BookPageState();
-}
-
-class _BookPageState extends State<BookPage> {
   @override
   Widget build(BuildContext context) {
     Pdf_controller pdf_controller = Get.put(Pdf_controller());
@@ -29,8 +25,17 @@ class _BookPageState extends State<BookPage> {
         ),
         centerTitle: true,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          pdf_controller.pdfViewerKey.currentState?.openBookmarkView();
+        },
+        child: Icon(
+          Icons.bookmark,
+          color: Theme.of(context).colorScheme.background,
+        ),
+      ),
       body: SfPdfViewer.network(
-        'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
+        bookUrl,
         key: pdf_controller.pdfViewerKey,
       ),
     );

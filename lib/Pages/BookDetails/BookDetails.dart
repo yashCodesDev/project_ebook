@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:project_ebook/Models/book_model.dart';
 import 'package:project_ebook/Pages/BookDetails/BookActionBt.dart';
 import 'Headerwidget.dart';
 
 class BookDetails extends StatelessWidget {
-  const BookDetails({super.key});
+  final BookModel book;
+  const BookDetails({
+    super.key,
+    required this.book,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,12 +17,20 @@ class BookDetails extends StatelessWidget {
       child: Column(
         children: [
           Container(
-              //height: 450,
               padding: const EdgeInsets.all(10),
               color: Theme.of(context).colorScheme.primary,
-              child: const Row(children: [
+              child: Row(children: [
                 Expanded(
-                  child: BookDetailsHeader(),
+                  child: BookDetailsHeader(
+                    coverUrl: book.coverUrl!,
+                    title: book.title!,
+                    author: book.author!,
+                    description: book.description!,
+                    rating: book.rating!,
+                    pages: book.pages.toString(),
+                    language: book.language!,
+                    audiolen: book.audioLen!,
+                  ),
                 ),
               ])),
           const SizedBox(height: 20),
@@ -39,7 +52,7 @@ class BookDetails extends StatelessWidget {
                   children: [
                     Flexible(
                       child: Text(
-                        "n publishing and graphic design,lorem ipsum is a placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.From its medieval origins to the digital era, learn everything there is to know about the ubiquitous lorem ipsum passage.",
+                        book.description!,
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
@@ -59,14 +72,16 @@ class BookDetails extends StatelessWidget {
                   children: [
                     Flexible(
                       child: Text(
-                        "n publishing and graphic design,lorem ipsum is a placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.From its medieval origins to the digital era, learn everything there is to know about the ubiquitous lorem ipsum passage. ",
+                        book.aboutAuthor!,
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 30),
-                const BookActionBt(),
+                BookActionBt(
+                  bookUrl: book.bookurl.toString(),
+                ),
               ],
             ),
           )
