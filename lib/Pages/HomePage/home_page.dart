@@ -279,7 +279,9 @@ class HomePage extends StatelessWidget {
                   .map((e) => BookTile(
                         coverUrl: e.coverUrl!,
                         title: e.title!,
-                        ontap: () {},
+                        ontap: () {
+                          Get.to(BookDetails(book: e));
+                        },
                         author: e.author!,
                         price: e.price!,
                         rating: e.rating!,

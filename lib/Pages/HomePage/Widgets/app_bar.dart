@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:project_ebook/Config/colors.dart';
+import 'package:project_ebook/Pages/ProfilePage/ProfilePage.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({
@@ -20,11 +22,16 @@ class HomeAppBar extends StatelessWidget {
               fontWeight: FontWeight.w500,
               color: Theme.of(context).colorScheme.background),
         ),
-        CircleAvatar(
-          backgroundColor: Theme.of(context).colorScheme.background,
-          child: const Text(
-            "Y",
-            style: TextStyle(color: EColors.primaryColor),
+        InkWell(
+          onTap: () {
+            Get.to(Profilepage());
+          },
+          child: CircleAvatar(
+            backgroundColor: Theme.of(context).colorScheme.background,
+            child: const Text(
+              "Y",
+              style: TextStyle(color: EColors.primaryColor),
+            ),
           ),
         )
       ],
