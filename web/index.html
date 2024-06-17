@@ -35,9 +35,33 @@
   <script>
     // The value below is injected by flutter build, do not touch.
     const serviceWorkerVersion = null;
+
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
+
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js" defer></script>
+  
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyD4Ue5Iv-V42M2Fn12SvILDfQWh9VjcivI",
+      authDomain: "e-book-iic.firebaseapp.com",
+      databaseURL: "https://e-book-iic-default-rtdb.firebaseio.com",
+      projectId: "e-book-iic",
+      storageBucket: "e-book-iic.appspot.com",
+      messagingSenderId: "457570772837",
+      appId: "1:457570772837:web:d7ce7150433a950927a38c",
+      measurementId: "G-4LFMHR3RGB"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+   
+  </script>
+  <meta name="google-signin-client_id" content="457570772837-8th91v7bv65ibkq6ef2pldpcfnb45cjd.apps.googleusercontent.com">
+
 </head>
 <body>
   <script>

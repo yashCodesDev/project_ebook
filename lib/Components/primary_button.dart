@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_ebook/Config/colors.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String btnName;
@@ -23,6 +24,15 @@ class PrimaryButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Container(
+              padding: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                color: EColors.backgroudColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Image.asset("Assets/Icons/google.png"),
+            ),
+            const SizedBox(width: 10),
             Text(
               btnName,
               style: Theme.of(context)

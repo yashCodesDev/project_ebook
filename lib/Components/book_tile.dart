@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class BookTile extends StatelessWidget {
   final String title;
   final String coverUrl;
   final String author;
-  final int price;
-  final String rating;
-  final String totalRating;
+
   final VoidCallback ontap;
 
   const BookTile({
@@ -15,9 +12,6 @@ class BookTile extends StatelessWidget {
     required this.title,
     required this.coverUrl,
     required this.author,
-    required this.price,
-    required this.rating,
-    required this.totalRating,
     required this.ontap,
   });
 
@@ -51,9 +45,11 @@ class BookTile extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(
+                  child: Image.network(
                     coverUrl,
-                    width: 100,
+                    width: 120,
+                    height: 150,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
@@ -71,26 +67,7 @@ class BookTile extends StatelessWidget {
                   Text("By : $author",
                       style: Theme.of(context).textTheme.labelMedium),
                   const SizedBox(height: 5),
-                  Text(
-                    "Price : $price",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                  ),
                   const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      SvgPicture.asset("Assets/Icons/star.svg"),
-                      Text(
-                        rating,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      Text(
-                        "($totalRating ratings)",
-                        style: Theme.of(context).textTheme.labelMedium,
-                      ),
-                    ],
-                  )
                 ],
               ))
             ],

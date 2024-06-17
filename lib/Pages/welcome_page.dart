@@ -1,14 +1,16 @@
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_ebook/Components/primary_button.dart';
 import 'package:project_ebook/Config/colors.dart';
-import 'package:project_ebook/Pages/HomePage/home_page.dart';
+import 'package:project_ebook/Controller/auth_controller.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AuthController authController = Get.put(AuthController());
     return Scaffold(
       body: Column(
         children: [
@@ -97,9 +99,9 @@ class WelcomePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(10),
             child: PrimaryButton(
-              btnName: 'Continue',
+              btnName: 'LOGIN WITH GOOGLE',
               ontap: () {
-                Get.offAll(const HomePage());
+                authController.signInWithGoogle();
               },
             ),
           )

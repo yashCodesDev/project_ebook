@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "457570772837",
+    "project_id": "e-book-iic",
+    "storage_bucket": "e-book-iic.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:457570772837:android:8c245945408fa65827a38c",
+        "android_client_info": {
+          "package_name": "com.example.project_ebook"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDulvVolqQqkMzaLC7vhLtHzxPbWweJLQo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

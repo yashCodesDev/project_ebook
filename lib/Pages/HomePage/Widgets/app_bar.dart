@@ -1,8 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:project_ebook/Config/colors.dart';
-import 'package:project_ebook/Pages/ProfilePage/ProfilePage.dart';
+import 'package:project_ebook/Pages/ProfilePage/profile_page.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({
@@ -11,6 +12,7 @@ class HomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -24,13 +26,13 @@ class HomeAppBar extends StatelessWidget {
         ),
         InkWell(
           onTap: () {
-            Get.to(Profilepage());
+            Get.to(const Profilepage());
           },
           child: CircleAvatar(
             backgroundColor: Theme.of(context).colorScheme.background,
-            child: const Text(
-              "Y",
-              style: TextStyle(color: EColors.primaryColor),
+            child: Text(
+              user?.displayName?.substring(0, 1) ?? " ",
+              style: const TextStyle(color: EColors.primaryColor),
             ),
           ),
         )

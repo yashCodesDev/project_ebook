@@ -1,24 +1,31 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 import 'package:project_ebook/Components/BackButton.dart';
 import 'package:project_ebook/Components/book_tile.dart';
-import 'package:project_ebook/Components/primary_button.dart';
 import 'package:project_ebook/Config/colors.dart';
-import 'package:project_ebook/Models/data.dart';
+import 'package:project_ebook/Controller/auth_controller.dart';
+import 'package:project_ebook/Controller/book_controller.dart';
 import 'package:project_ebook/Pages/AddNewBook/AddNewBook.dart';
-import 'package:project_ebook/Pages/HomePage/home_page.dart';
 
 class Profilepage extends StatelessWidget {
   const Profilepage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+    BookController bookController = Get.put(BookController());
+    AuthController authController = Get.put(AuthController());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      bookController.getUserBook();
+    });
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(AddnewbookPage());
+          Get.to(const AddnewbookPage());
         },
         child: Icon(
           Icons.add,
@@ -39,12 +46,12 @@ class Profilepage extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(height: 30),
+                        const SizedBox(height: 20),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            MyBackButton(),
+                            const MyBackButton(),
                             Text(
                               "Profile",
                               style: Theme.of(context)
@@ -56,12 +63,20 @@ class Profilepage extends StatelessWidget {
                                           .colorScheme
                                           .surface),
                             ),
-                            SizedBox(width: 70)
+                            IconButton(
+                              onPressed: () {
+                                authController.signOut();
+                              },
+                              icon: Icon(
+                                Icons.exit_to_app,
+                                color: Theme.of(context).colorScheme.background,
+                              ),
+                            )
                           ],
                         ),
-                        SizedBox(height: 50),
+                        const SizedBox(height: 50),
                         Container(
-                          padding: EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100),
                               border: Border.all(
@@ -75,15 +90,15 @@ class Profilepage extends StatelessWidget {
                             height: 120,
                             child: ClipRRect(
                                 borderRadius: BorderRadius.circular(100),
-                                child: Image.asset(
-                                  "Assets/Images/boundraries.jpg",
+                                child: Image.network(
+                                  user!.photoURL!,
                                   fit: BoxFit.cover,
                                 )),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Text(
-                          "Tarun Jhamb",
+                          user.displayName!.trim(),
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge
@@ -92,20 +107,23 @@ class Profilepage extends StatelessWidget {
                         ), // background -> replaced by -> surface
 
                         Text(
-                          "tarun@gmail.com",
+                          user.email.toString(),
                           style: Theme.of(context)
                               .textTheme
                               .labelLarge
                               ?.copyWith(
                                   color: Theme.of(context)
                                       .colorScheme
-                                      .surfaceBright),
+                                      .surfaceVariant),
                         ),
                       ],
                     ),
                   ),
                 ],
               ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
             Padding(
               padding: const EdgeInsets.all(10),
@@ -115,24 +133,51 @@ class Profilepage extends StatelessWidget {
                     children: [
                       Text(
                         "Your Books",
-                        style: Theme.of(context).textTheme.labelLarge,
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelLarge
+                            ?.copyWith(fontSize: 25),
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
-                  Column(
-                    children: bookData
-                        .map((e) => BookTile(
-                              title: e.title!,
-                              coverUrl: e.coverUrl!,
-                              author: e.author!,
-                              price: e.price!,
-                              rating: e.rating!,
-                              totalRating: e.numberofRating!,
-                              ontap: () {},
-                            ))
-                        .toList(),
-                  )
+                  const SizedBox(height: 20),
+                  Obx(() {
+                    if (bookController.isLoadingBooks.value) {
+                      // Show a loading indicator while fetching data
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else {
+                      return bookController.currentUserBooks.isEmpty
+                          ? Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: SizedBox(
+                                height: 150,
+                                width: double.infinity,
+                                child: Text(
+                                  "Ready to start your e-book journey ? Add your first contribution now!",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelLarge
+                                      ?.copyWith(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.w500,
+                                          color: EColors.labelColor),
+                                ),
+                              ),
+                            )
+                          : Column(
+                              children: bookController.currentUserBooks
+                                  .map((e) => BookTile(
+                                        title: e.title!,
+                                        coverUrl: e.coverUrl!,
+                                        author: e.author!,
+                                        ontap: () {},
+                                      ))
+                                  .toList(),
+                            );
+                    }
+                  })
                 ],
               ),
             ),

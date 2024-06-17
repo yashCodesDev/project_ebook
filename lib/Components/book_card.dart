@@ -12,6 +12,7 @@ class BookCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("Cover URL: $coverUrl");
     return Padding(
       padding: const EdgeInsets.only(right: 20),
       child: InkWell(
@@ -36,9 +37,11 @@ class BookCard extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(
+                  child: Image.network(
                     coverUrl,
                     width: 120,
+                    height: 150,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),

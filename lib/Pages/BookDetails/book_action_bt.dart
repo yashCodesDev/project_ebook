@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:project_ebook/Pages/BookPage/BookPage.dart';
+import 'package:project_ebook/Pages/BookPage/book_page.dart';
 
 class BookActionBt extends StatelessWidget {
   final String bookUrl;
@@ -11,7 +11,7 @@ class BookActionBt extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         height: 60,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.primary,
             borderRadius: BorderRadius.circular(15)),
@@ -47,7 +47,7 @@ class BookActionBt extends StatelessWidget {
             Row(
               children: [
                 SvgPicture.asset("Assets/Icons/playe.svg"),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Text(
                   "PLAY BOOK",
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
