@@ -38,25 +38,25 @@ class BookActionBt extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              width: 3,
-              height: 27,
-              decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.background),
-            ),
-            Row(
-              children: [
-                SvgPicture.asset("Assets/Icons/playe.svg"),
-                const SizedBox(width: 10),
-                Text(
-                  "PLAY BOOK",
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.background,
-                        letterSpacing: 1.5,
-                      ),
-                ),
-              ],
-            )
+            // Container(
+            //   width: 3,
+            //   height: 27,
+            //   decoration: BoxDecoration(
+            //       color: Theme.of(context).colorScheme.background),
+            // ),
+            // Row(
+            //   children: [
+            //     SvgPicture.asset("Assets/Icons/playe.svg"),
+            //     const SizedBox(width: 10),
+            //     Text(
+            //       "PLAY BOOK",
+            //       style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            //             color: Theme.of(context).colorScheme.background,
+            //             letterSpacing: 1.5,
+            //           ),
+            //     ),
+            //   ],
+            // )
           ],
         ));
   }

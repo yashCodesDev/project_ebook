@@ -174,40 +174,40 @@ class AddnewbookPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.primary,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.audio_file,
-                                color: Theme.of(context).colorScheme.surface,
-                              ),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              Text(
-                                "Book Audio",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge
-                                    ?.copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .surface),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+                      // const SizedBox(
+                      //   width: 10,
+                      // ),
+                      // Expanded(
+                      //   child: Container(
+                      //     padding: const EdgeInsets.all(16),
+                      //     decoration: BoxDecoration(
+                      //       color: Theme.of(context).colorScheme.primary,
+                      //       borderRadius: BorderRadius.circular(10),
+                      //     ),
+                      //     child: Row(
+                      //       mainAxisAlignment: MainAxisAlignment.center,
+                      //       children: [
+                      //         Icon(
+                      //           Icons.audio_file,
+                      //           color: Theme.of(context).colorScheme.surface,
+                      //         ),
+                      //         const SizedBox(
+                      //           width: 8,
+                      //         ),
+                      //         Text(
+                      //           "Book Audio",
+                      //           style: Theme.of(context)
+                      //               .textTheme
+                      //               .bodyLarge
+                      //               ?.copyWith(
+                      //                   color: Theme.of(context)
+                      //                       .colorScheme
+                      //                       .surface),
+                      //         )
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                   const SizedBox(height: 10),
@@ -257,11 +257,57 @@ class AddnewbookPage extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
+                      // Expanded(
+                      //   child: Obx(
+                      //     () => DropdownButtonFormField<String>(
+                      //       value: bookController.selectedCategory.value,
+                      //       decoration: InputDecoration(
+                      //         prefixIcon: const Icon(Icons.category),
+                      //         hintText: "Category",
+                      //         contentPadding: const EdgeInsets.symmetric(
+                      //             vertical: 16, horizontal: 10),
+                      //         border: OutlineInputBorder(
+                      //           borderRadius: BorderRadius.circular(10),
+                      //         ),
+                      //       ),
+                      //       items: bookController.categoryData
+                      //           .map((category) => DropdownMenuItem<String>(
+                      //                 value: category['label'],
+                      //                 child: Text(category['label']!),
+                      //               ))
+                      //           .toList(),
+                      //       onChanged: (newValue) {
+                      //         bookController.selectedCategory.value = newValue!;
+                      //       },
+                      //     ),
+                      //   ),
+                      // ),
                       Expanded(
-                        child: MytextFormField(
-                          hintText: "Audio Len",
-                          icon: Icons.audiotrack,
-                          controller: bookController.audioLen,
+                        child: Obx(
+                          () => DropdownButtonFormField<String>(
+                            value:
+                                bookController.selectedCategory.value.isNotEmpty
+                                    ? bookController.selectedCategory.value
+                                    : null, // Handle empty case gracefully
+                            decoration: InputDecoration(
+                              prefixIcon: const Icon(Icons.category),
+                              hintText: "Category",
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 16, horizontal: 10),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            items: bookController.categoryData
+                                .map((category) => DropdownMenuItem<String>(
+                                      value: category['label'],
+                                      child: Text(category['label'] ?? ''),
+                                    ))
+                                .toList(),
+                            onChanged: (newValue) {
+                              bookController.selectedCategory.value = newValue!;
+                            },
+                          ),
                         ),
                       ),
                     ],

@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class BookModel {
   String? id;
   String? title;
@@ -16,6 +14,7 @@ class BookModel {
   String? coverUrl;
   int? price;
   String? numberofRating;
+  String? titleLowercase;
 
   BookModel(
       {this.id,
@@ -33,7 +32,7 @@ class BookModel {
       this.price,
       this.coverUrl,
       this.numberofRating,
-      required String titleLowercase});
+      this.titleLowercase});
 
   BookModel.fromJson(Map<String, dynamic> json) {
     if (json["id"] is String) {

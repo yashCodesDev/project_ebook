@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_ebook/Controller/Pdf_controller.dart';
+import 'package:project_ebook/Controller/book_controller.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class BookPage extends StatelessWidget {
@@ -10,6 +11,7 @@ class BookPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Pdf_controller pdf_controller = Get.put(Pdf_controller());
+    BookController bookController = Get.put(BookController());
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
@@ -17,7 +19,7 @@ class BookPage extends StatelessWidget {
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
-          "Book title",
+          "Book",
           style: Theme.of(context)
               .textTheme
               .headlineMedium

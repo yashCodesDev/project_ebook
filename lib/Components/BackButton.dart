@@ -10,7 +10,7 @@ class MyBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.offAll(const HomePage());
+        Get.back();
       },
       child: Row(
         children: [

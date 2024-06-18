@@ -17,7 +17,7 @@ class BookController extends GetxController {
   final TextEditingController author = TextEditingController();
   final TextEditingController aboutAuth = TextEditingController();
   final TextEditingController pages = TextEditingController();
-  final TextEditingController audioLen = TextEditingController();
+  final TextEditingController category = TextEditingController();
   final TextEditingController language = TextEditingController();
   final TextEditingController price = TextEditingController();
   final ImagePicker imagePicker = ImagePicker();
@@ -35,6 +35,25 @@ class BookController extends GetxController {
   RxBool isSearching = false.obs;
   // var suggestions = <String>[].obs;
   var wishlistBooks = <BookModel>[].obs;
+  final RxString selectedCategory = ''.obs;
+  var categoryData = [
+    {
+      "icon": "Assets/Icons/science-atoms.svg",
+      "label": "Science",
+    },
+    {
+      "icon": "Assets/Icons/bank.svg",
+      "label": "Commerce",
+    },
+    {
+      "icon": "Assets/Icons/world.svg",
+      "label": "Literature",
+    },
+    {
+      "icon": "Assets/Icons/heart.svg",
+      "label": "Computer",
+    },
+  ];
 
   @override
   void onInit() {
@@ -165,9 +184,9 @@ class BookController extends GetxController {
       aboutAuthor: aboutAuth.text,
       pages: int.parse(pages.text),
       language: language.text,
-      audioLen: audioLen.text,
       audioUrl: '',
       rating: '',
+      category: selectedCategory.value,
     );
 
     await db.collection('Books').add(newBook.toJson());
@@ -179,7 +198,7 @@ class BookController extends GetxController {
     aboutAuth.clear();
     pages.clear();
     language.clear();
-    audioLen.clear();
+    category.clear();
     author.clear();
     price.clear();
     imageUrl.value = '';
@@ -289,7 +308,7 @@ class BookController extends GetxController {
   //   }
   // }
 
-  void addToWishlist(BookModel book) async {
+  Future<void> addToWishlist(BookModel book) async {
     try {
       await db
           .collection('users')
@@ -305,7 +324,7 @@ class BookController extends GetxController {
     }
   }
 
-  void removeFromWishlist(BookModel book) async {
+  Future<void> removeFromWishlist(BookModel book) async {
     try {
       await db
           .collection('users')
@@ -326,6 +345,80 @@ class BookController extends GetxController {
       removeFromWishlist(book);
     } else {
       addToWishlist(book);
+    }
+  }
+  // void toggleLikeBook(BookModel book) {
+  //   // Check if book is already in wishlist
+  //   bool isInWishlist = wishlistBooks.any((b) => b.id == book.id);
+
+  //   if (isInWishlist) {
+  //     removeFromWishlist(book);
+  //   } else {
+  //     addToWishlist(book);
+  //   }
+  // }
+
+  // Future<void> deleteBook(String bookId) async {
+  //   try {
+  //     await FirebaseFirestore.instance
+  //         .collection('userBooks')
+  //         .doc(FirebaseAuth.instance.currentUser!.uid)
+  //         .collection('Books')
+  //         .doc(bookId)
+  //         .delete();
+  //     await FirebaseFirestore.instance.collection('Books').doc(bookId).delete();
+
+  //     // Show success message (optional)
+  //   } catch (error) {
+  //     // Handle deletion error (e.g., show error message)
+  //     print(error);
+  //   }
+  // }
+  // Future<void> deleteBook(String bookId) async {
+  //   final firestore = FirebaseFirestore.instance;
+  //   final batch = firestore.batch();
+
+  //   final userBooksRef = firestore
+  //       .collection('userBooks')
+  //       .doc(FirebaseAuth.instance.currentUser!.uid)
+  //       .collection('Books')
+  //       .doc(bookId);
+
+  //   final mainBooksRef = firestore.collection('Books').doc(bookId);
+
+  //   batch.delete(userBooksRef);
+  //   batch.delete(mainBooksRef);
+
+  //   try {
+  //     await batch.commit();
+  //     // Show success message (optional)
+  //   } catch (error) {
+  //     // Handle deletion error (e.g., show error message)
+  //     print(error);
+  //   }
+  // }
+  Future<void> deleteBook(String bookId) async {
+    try {
+      final firestore = FirebaseFirestore.instance;
+      final batch = firestore.batch();
+
+      final userBooksRef = firestore
+          .collection('userBooks')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('Books')
+          .doc(bookId);
+
+      final mainBooksRef = firestore.collection('Books').doc(bookId);
+
+      batch.delete(userBooksRef);
+      batch.delete(mainBooksRef);
+
+      await batch.commit();
+      successMessage("Delete Successfull");
+      // Optionally, update local state or show success message
+    } catch (e) {
+      print('Error deleting book: $e');
+      // Handle error gracefully, show error message, etc.
     }
   }
 }

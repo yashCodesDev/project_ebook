@@ -197,24 +197,58 @@ class HomePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              scrollDirection: Axis.horizontal,
-              child: Obx(() => bookController.wishlistBooks.isEmpty
-                  ? const Center(child: Text("No liked books yet"))
-                  : SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: bookController.wishlistBooks
-                            .map((e) => BookCard(
-                                  coverUrl: e.coverUrl!,
-                                  title: e.title!,
-                                  ontap: () => Get.to(BookDetails(book: e)),
-                                ))
-                            .toList(),
-                      ),
-                    )))
+
+          // SingleChildScrollView(
+          //   padding: const EdgeInsets.symmetric(horizontal: 10),
+          //   scrollDirection: Axis.horizontal,
+          //   child: Obx(
+          //     () => Row(
+          //       children: bookController.wishlistBooks
+          //           .map(
+          //             (e) => BookCard(
+          //               coverUrl: e.coverUrl!,
+          //               title: e.title!,
+          //               ontap: () {
+          //                 Get.to(BookDetails(book: e));
+          //               },
+          //             ),
+          //           )
+          //           .toList(),
+          //     ),
+          //   ),
+          // )
+          // SingleChildScrollView(
+          //     padding: const EdgeInsets.symmetric(horizontal: 10),
+          //     scrollDirection: Axis.horizontal,
+          //     child: Obx(() => bookController.wishlistBooks.isEmpty
+          //         ? const Center(child: Text("No liked books yet"))
+          //         : SingleChildScrollView(
+          //             padding: const EdgeInsets.symmetric(horizontal: 10),
+          //             scrollDirection: Axis.horizontal,
+          //             child: Row(
+          //               children: bookController.wishlistBooks
+          //                   .map((e) => BookCard(
+          //                         coverUrl: e.coverUrl!,
+          //                         title: e.title!,
+          //                         ontap: () => Get.to(BookDetails(book: e)),
+          //                       ))
+          //                   .toList(),
+          //             ),
+          //           )))
+          Obx(() {
+            return Column(
+              children: bookController.bookData.map((book) {
+                return BookTile(
+                  coverUrl: book.coverUrl!,
+                  title: book.title!,
+                  author: book.author!,
+                  ontap: () {
+                    Get.to(BookDetails(book: book));
+                  },
+                );
+              }).toList(),
+            );
+          }),
         ],
       ),
     );

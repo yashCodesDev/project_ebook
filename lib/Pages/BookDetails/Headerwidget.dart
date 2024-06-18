@@ -6,6 +6,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:project_ebook/Components/BackButton.dart';
 import 'package:project_ebook/Controller/book_controller.dart';
 import 'package:project_ebook/Controller/liked_controller.dart';
+import 'package:project_ebook/Models/book_model.dart';
 
 class BookDetailsHeader extends StatelessWidget {
   final String bookId;
@@ -32,24 +33,45 @@ class BookDetailsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final BookController likeController = Get.put(BookController());
+    //  final book = BookModel(id: bookId, title: title, titleLowercase: title.toLowerCase());
+    final book = BookModel(
+      id: bookId,
+      coverUrl: coverUrl,
+      title: title,
+      author: author,
+      description: description,
+      rating: rating,
+      language: language,
+      titleLowercase: title.toLowerCase(),
+    );
 
     return Column(
       children: [
         const SizedBox(height: 50),
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const MyBackButton(),
-            Obx(() {
-              bool isLiked = likeController.wishlistBooks.contains(bookId);
-              return IconButton(
-                icon: Icon(
-                    isLiked ? CupertinoIcons.heart_fill : CupertinoIcons.heart),
-                onPressed: () {
-                  likeController.toggleLikeBook(bookId);
-                },
-              );
-            }),
+            MyBackButton(),
+            // Obx(() {
+            //   // BookModel book = likeController.wishlistBooks
+            //   // BookModel? book = likeController.wishlistBooks.firstWhereOrNull(
+            //   //     (b) =>
+            //   //         b.id ==
+            //   //         bookId); //     .firstWhere((b) => b.id == bookId);
+            //   bool isLiked =
+            //       likeController.wishlistBooks.any((b) => b.id == bookId);
+
+            //   // bool isLiked = likeController.wishlistBooks.contains(book);
+            //   return IconButton(
+            //     icon: Icon(
+            //         isLiked ? CupertinoIcons.heart_fill : CupertinoIcons.heart),
+            //     onPressed: () {
+            //       // likeController.toggleLikeBook(book);
+
+            //       likeController.toggleLikeBook(book);
+            //     },
+            //   );
+            // }),
           ],
         ),
         const SizedBox(height: 40),
