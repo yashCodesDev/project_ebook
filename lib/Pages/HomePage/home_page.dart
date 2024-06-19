@@ -129,26 +129,26 @@ class HomePage extends StatelessWidget {
                 const SizedBox(height: 20),
                 const MyInputTextField(),
                 const SizedBox(height: 20),
-                Row(
-                  children: [
-                    Text(
-                      "Topics",
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            color: Theme.of(context).colorScheme.background,
-                          ),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   children: [
+                //     Text(
+                //       "Topics",
+                //       style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                //             color: Theme.of(context).colorScheme.background,
+                //           ),
+                //     ),
+                //   ],
+                // ),
                 const SizedBox(height: 10),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: categoryData
-                        .map((e) => CategoryWidget(
-                            iconPath: e["icon"]!, btnName: e["label"]!))
-                        .toList(),
-                  ),
-                ),
+                // SingleChildScrollView(
+                //   scrollDirection: Axis.horizontal,
+                //   child: Row(
+                //     children: categoryData
+                //         .map((e) => CategoryWidget(
+                //             iconPath: e["icon"]!, btnName: e["label"]!))
+                //         .toList(),
+                //   ),
+                // ),
               ],
             ),
           ),

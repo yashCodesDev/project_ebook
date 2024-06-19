@@ -9,22 +9,22 @@ class BookActionBt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: 60,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primary,
-            borderRadius: BorderRadius.circular(15)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-              onTap: () {
-                Get.to(BookPage(
-                  bookUrl: bookUrl,
-                ));
-              },
-              child: Row(
+    return InkWell(
+      onTap: () {
+        Get.to(BookPage(
+          bookUrl: bookUrl,
+        ));
+      },
+      child: Container(
+          height: 60,
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary,
+              borderRadius: BorderRadius.circular(15)),
+          child: Row(
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
                 children: [
                   SvgPicture.asset("Assets/Icons/book.svg"),
                   const SizedBox(width: 15),
@@ -37,27 +37,27 @@ class BookActionBt extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-            // Container(
-            //   width: 3,
-            //   height: 27,
-            //   decoration: BoxDecoration(
-            //       color: Theme.of(context).colorScheme.background),
-            // ),
-            // Row(
-            //   children: [
-            //     SvgPicture.asset("Assets/Icons/playe.svg"),
-            //     const SizedBox(width: 10),
-            //     Text(
-            //       "PLAY BOOK",
-            //       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            //             color: Theme.of(context).colorScheme.background,
-            //             letterSpacing: 1.5,
-            //           ),
-            //     ),
-            //   ],
-            // )
-          ],
-        ));
+              // Container(
+              //   width: 3,
+              //   height: 27,
+              //   decoration: BoxDecoration(
+              //       color: Theme.of(context).colorScheme.background),
+              // ),
+              // Row(
+              //   children: [
+              //     SvgPicture.asset("Assets/Icons/playe.svg"),
+              //     const SizedBox(width: 10),
+              //     Text(
+              //       "PLAY BOOK",
+              //       style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              //             color: Theme.of(context).colorScheme.background,
+              //             letterSpacing: 1.5,
+              //           ),
+              //     ),
+              //   ],
+              // )
+            ],
+          )),
+    );
   }
 }

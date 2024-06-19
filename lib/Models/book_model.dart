@@ -14,7 +14,7 @@ class BookModel {
   String? coverUrl;
   int? price;
   String? numberofRating;
-  String? titleLowercase;
+  String? titleLowerCase;
 
   BookModel(
       {this.id,
@@ -32,7 +32,7 @@ class BookModel {
       this.price,
       this.coverUrl,
       this.numberofRating,
-      this.titleLowercase});
+      this.titleLowerCase});
 
   BookModel.fromJson(Map<String, dynamic> json) {
     if (json["id"] is String) {
@@ -53,8 +53,8 @@ class BookModel {
     if (json["language"] is String) {
       language = json["language"];
     }
-    if (json["audioLen"] is String) {
-      audioLen = json["audioLen"];
+    if (json["titleLowerCase"] is String) {
+      titleLowerCase = json["titleLowerCase"];
     }
     if (json["author"] is String) {
       author = json["author"];
@@ -99,6 +99,7 @@ class BookModel {
     _data["coverUrl"] = coverUrl;
     _data["price"] = price;
     _data["numberofRating"] = numberofRating;
+    _data["titleLowerCase"] = titleLowerCase;
     return _data;
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class BookCard extends StatelessWidget {
   final String coverUrl;
   final String title;
-  final VoidCallback ontap;
+  final VoidCallback? ontap;
   const BookCard(
       {super.key,
       required this.coverUrl,

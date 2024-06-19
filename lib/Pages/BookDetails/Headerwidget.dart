@@ -17,7 +17,8 @@ class BookDetailsHeader extends StatelessWidget {
   final String rating;
   final String pages;
   final String language;
-  final String audiolen;
+  final String category;
+
   const BookDetailsHeader(
       {super.key,
       required this.coverUrl,
@@ -27,8 +28,8 @@ class BookDetailsHeader extends StatelessWidget {
       required this.rating,
       required this.pages,
       required this.language,
-      required this.audiolen,
-      required this.bookId});
+      required this.bookId,
+      required this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class BookDetailsHeader extends StatelessWidget {
       description: description,
       rating: rating,
       language: language,
-      titleLowercase: title.toLowerCase(),
+      titleLowerCase: title.toLowerCase(),
     );
 
     return Column(
@@ -83,6 +84,8 @@ class BookDetailsHeader extends StatelessWidget {
               child: Image.network(
                 coverUrl,
                 width: 170,
+                height: 200,
+                fit: BoxFit.cover,
               ),
             )
           ],
@@ -150,7 +153,7 @@ class BookDetailsHeader extends StatelessWidget {
               children: [
                 Text(
                   "Language",
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
                       color: Theme.of(context).colorScheme.background),
                 ),
                 Text(
@@ -163,13 +166,13 @@ class BookDetailsHeader extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  "Audio",
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  "Category",
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
                       color: Theme.of(context).colorScheme.background),
                 ),
                 Text(
-                  audiolen,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  category,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: Theme.of(context).colorScheme.background),
                 ),
               ],

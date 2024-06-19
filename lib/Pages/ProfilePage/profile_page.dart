@@ -169,34 +169,11 @@ class Profilepage extends StatelessWidget {
                             )
                           : Column(
                               children: bookController.currentUserBooks
-                                  .map((e) => ProfileBookTile(
+                                  .map((e) => BookTile(
                                         title: e.title!,
                                         coverUrl: e.coverUrl!,
                                         author: e.author!,
                                         ontap: () {},
-                                        onDelete: () => showDialog(
-                                          context: context,
-                                          builder: (context) => AlertDialog(
-                                            title: const Text('Delete Book'),
-                                            content: const Text(
-                                                'Are you sure you want to delete this book?'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () =>
-                                                    Navigator.pop(context),
-                                                child: const Text('Cancel'),
-                                              ),
-                                              TextButton(
-                                                onPressed: () {
-                                                  bookController
-                                                      .deleteBook(e.id!);
-                                                  Navigator.pop(context);
-                                                },
-                                                child: const Text('Delete'),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
                                       ))
                                   .toList(),
                             );

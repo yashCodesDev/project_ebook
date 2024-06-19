@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:project_ebook/Config/colors.dart';
@@ -17,7 +18,11 @@ class HomeAppBar extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SvgPicture.asset("Assets/Icons/dashboard.svg"),
+        GestureDetector(
+            onTap: () {
+              Scaffold.of(context).openDrawer();
+            },
+            child: SvgPicture.asset("Assets/Icons/dashboard.svg")),
         Text(
           "E-BOOK",
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(

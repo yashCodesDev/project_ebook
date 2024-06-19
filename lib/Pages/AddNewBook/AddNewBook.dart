@@ -368,7 +368,7 @@ class AddnewbookPage extends StatelessWidget {
                                 : InkWell(
                                     onTap: () {
                                       bookController.createBook();
-                                      Get.offAll(const Profilepage());
+                                      Get.off(const Profilepage());
                                     },
                                     child: Row(
                                       mainAxisAlignment:

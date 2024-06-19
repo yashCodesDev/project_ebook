@@ -70,6 +70,20 @@ class BookController extends GetxController {
     }
   }
 
+  void filterBooksByCategory(String category) {
+    bookData.clear();
+    if (category == 'All') {
+      bookData.assignAll(bookData); // Show all user's books
+    } else {
+      // Filter books by category
+      for (final book in bookData) {
+        if (book.category?.toLowerCase() == category.toLowerCase()) {
+          bookData.add(book);
+        }
+      }
+    }
+  }
+
   void getUserBook() async {
     currentUserBooks.clear();
     final books = await db
@@ -176,7 +190,7 @@ class BookController extends GetxController {
     final newBook = BookModel(
       id: '${bookData.length + 1}',
       title: title.text,
-      titleLowercase: title.text.toLowerCase(),
+      titleLowerCase: title.text.toLowerCase(),
       description: des.text,
       coverUrl: imageUrl.value,
       bookurl: pdfUrl.value,
@@ -397,27 +411,62 @@ class BookController extends GetxController {
   //     print(error);
   //   }
   // }
+  // Future<void> deleteBook(String bookId) async {
+  //   try {
+  //     final firestore = FirebaseFirestore.instance;
+  //     final batch = firestore.batch();
+
+  //     final userBooksRef = firestore
+  //         .collection('userBooks')
+  //         .doc(FirebaseAuth.instance.currentUser!.uid)
+  //         .collection('Books')
+  //         .doc(bookId);
+
+  //     final mainBooksRef = firestore.collection('Books').doc(bookId);
+
+  //     batch.delete(userBooksRef);
+  //     batch.delete(mainBooksRef);
+
+  //     await batch.commit();
+  //     successMessage("Delete Successfull");
+  //     // Optionally, update local state or show success message
+  //   } catch (e) {
+  //     print('Error deleting book: $e');
+  //     // Handle error gracefully, show error message, etc.
+  //   }
+  // }
+  bool success = false;
   Future<void> deleteBook(String bookId) async {
     try {
-      final firestore = FirebaseFirestore.instance;
-      final batch = firestore.batch();
+      // Delete from user's collection
+      // await firestore
+      //     .collection('userBook')
+      //     .doc(fAuth.currentUser!.uid)
+      //     .collection('Books')
+      //     .doc(bookId)
+      //     .delete();
 
-      final userBooksRef = firestore
-          .collection('userBooks')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
+      // Delete from main collection
+      await FirebaseFirestore.instance.collection('Books').doc(bookId).delete();
+
+      // Delete from user's collection
+      await FirebaseFirestore.instance
+          .collection('userBook')
+          .doc(fAuth.currentUser!.uid)
           .collection('Books')
-          .doc(bookId);
+          .doc(bookId)
+          .delete();
 
-      final mainBooksRef = firestore.collection('Books').doc(bookId);
+      successMessage("Book deleted successfully");
+      success = true;
 
-      batch.delete(userBooksRef);
-      batch.delete(mainBooksRef);
-
-      await batch.commit();
-      successMessage("Delete Successfull");
-      // Optionally, update local state or show success message
+      if (success) {
+        currentUserBooks.removeWhere((book) => book.id == bookId);
+        bookData.removeWhere((book) => book.id == bookId);
+      }
     } catch (e) {
       print('Error deleting book: $e');
+      errorMessage("Something went wrong");
       // Handle error gracefully, show error message, etc.
     }
   }
